@@ -1,10 +1,29 @@
 "use client";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { easeInOut } from "framer-motion"
+import { easeInOut } from "framer-motion";
+
+interface FormData {
+  name: string;
+  email: string;
+  phone: string;
+  timeFrame: string;
+  size: string;
+  quantity: string;
+  projectDescription: string;
+}
+
+interface FormErrors {
+  name?: string;
+  email?: string;
+  timeFrame?: string;
+  size?: string;
+  quantity?: string;
+  projectDescription?: string;
+}
 
 export default function QuoteRequestForm() {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
     phone: "",
@@ -14,8 +33,7 @@ export default function QuoteRequestForm() {
     projectDescription: "",
   });
 
- const [errors, setErrors] = useState<Record<string, string>>({});
-
+  const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const timeFrameOptions = [
@@ -44,7 +62,7 @@ export default function QuoteRequestForm() {
       transition: {
         staggerChildren: 0.1,
         duration: 0.6,
-         ease: easeInOut,
+        ease: easeInOut,
       },
     },
   };
@@ -54,14 +72,16 @@ export default function QuoteRequestForm() {
     visible: { opacity: 1, y: 0 },
   };
 
-  const handleInputChange = (e:React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
       [name]: value,
     }));
 
-    if (errors[name]) {
+    if (errors[name as keyof FormErrors]) {
       setErrors((prev) => ({
         ...prev,
         [name]: "",
@@ -70,7 +90,7 @@ export default function QuoteRequestForm() {
   };
 
   const validateForm = () => {
-    const newErrors = {};
+    const newErrors: FormErrors = {};
 
     if (!formData.name.trim()) newErrors.name = "Name is required";
 
@@ -89,7 +109,7 @@ export default function QuoteRequestForm() {
     return newErrors;
   };
 
-  const handleSubmit = async (e:React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const newErrors = validateForm();
@@ -102,23 +122,22 @@ export default function QuoteRequestForm() {
 
     try {
       console.log("Form submitted:", formData);
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        timeFrame: "",
-        size: "",
-        quantity: "",
-        projectDescription: "",
-      });
-
-      alert("Quote request submitted successfully!");
+      setTimeout(() => {
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          timeFrame: "",
+          size: "",
+          quantity: "",
+          projectDescription: "",
+        });
+        alert("Quote request submitted successfully!");
+        setIsSubmitting(false);
+      }, 2000);
     } catch (error) {
       console.error("Error submitting form:", error);
       alert("There was an error submitting your request. Please try again.");
-    } finally {
       setIsSubmitting(false);
     }
   };
@@ -148,6 +167,7 @@ export default function QuoteRequestForm() {
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Name */}
               <motion.div variants={itemVariants}>
                 <label
                   htmlFor="name"
@@ -178,6 +198,7 @@ export default function QuoteRequestForm() {
                 )}
               </motion.div>
 
+              {/* Email */}
               <motion.div variants={itemVariants}>
                 <label
                   htmlFor="email"
@@ -210,6 +231,7 @@ export default function QuoteRequestForm() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Phone */}
               <motion.div variants={itemVariants}>
                 <label
                   htmlFor="phone"
@@ -235,6 +257,7 @@ export default function QuoteRequestForm() {
                 />
               </motion.div>
 
+              {/* Time Frame */}
               <motion.div variants={itemVariants}>
                 <label
                   htmlFor="timeFrame"
@@ -266,14 +289,13 @@ export default function QuoteRequestForm() {
                   ))}
                 </select>
                 {errors.timeFrame && (
-                  <p className="mt-1 text-sm text-red-600">
-                    {errors.timeFrame}
-                  </p>
+                  <p className="mt-1 text-sm text-red-600">{errors.timeFrame}</p>
                 )}
               </motion.div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Size */}
               <motion.div variants={itemVariants}>
                 <label
                   htmlFor="size"
@@ -309,6 +331,7 @@ export default function QuoteRequestForm() {
                 )}
               </motion.div>
 
+              {/* Quantity */}
               <motion.div variants={itemVariants}>
                 <label
                   htmlFor="quantity"
@@ -345,6 +368,7 @@ export default function QuoteRequestForm() {
               </motion.div>
             </div>
 
+            {/* Project Description */}
             <motion.div variants={itemVariants}>
               <label
                 htmlFor="projectDescription"
@@ -357,8 +381,7 @@ export default function QuoteRequestForm() {
                   color: "#222222",
                 }}
               >
-                Please Describe Your Project
-                <span className="text-red-500">*</span>
+                Please Describe Your Project<span className="text-red-500">*</span>
               </label>
               <textarea
                 id="projectDescription"
@@ -367,41 +390,33 @@ export default function QuoteRequestForm() {
                 onChange={handleInputChange}
                 rows={6}
                 className={`w-full px-4 py-3 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#1959AC] focus:border-[#1959AC] ${
-                  errors.projectDescription
-                    ? "border-red-500"
-                    : "border-gray-300"
+                  errors.projectDescription ? "border-red-500" : "border-gray-300"
                 }`}
                 placeholder="Choose a project type"
               />
               {errors.projectDescription && (
-                <p className="mt-1 text-sm text-red-600">
-                  {errors.projectDescription}
-                </p>
+                <p className="mt-1 text-sm text-red-600">{errors.projectDescription}</p>
               )}
             </motion.div>
 
+            {/* Terms */}
             <motion.div
               variants={itemVariants}
               className="text-center text-sm"
               style={{ color: "#222222" }}
             >
               By submitting this form you agree to our{" "}
-              <a
-                href="#"
-                className="text-[#1959AC] hover:text-[#0546D2] underline"
-              >
+              <a href="#" className="text-[#1959AC] hover:text-[#0546D2] underline">
                 Terms of Service
               </a>{" "}
               and{" "}
-              <a
-                href="#"
-                className="text-[#1959AC] hover:text-[#0546D2] underline"
-              >
+              <a href="#" className="text-[#1959AC] hover:text-[#0546D2] underline">
                 Privacy Policy
               </a>
               .
             </motion.div>
 
+            {/* Submit Button */}
             <motion.div variants={itemVariants} className="text-center">
               <motion.button
                 whileHover={{ scale: 1.05 }}
@@ -436,7 +451,7 @@ export default function QuoteRequestForm() {
                   </>
                 ) : (
                   <>
-                    Loerum Ipsum
+                    Lorem Ipsum
                     <svg
                       className="ml-2 -mr-1 w-5 h-5"
                       fill="currentColor"
