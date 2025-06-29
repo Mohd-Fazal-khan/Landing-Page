@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import { circInOut } from "framer-motion"
 
 const Cardsection = () => {
   const containerVariants = {
@@ -19,7 +20,7 @@ const Cardsection = () => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: [0.42, 0, 0.58, 1] },
+      transition: { duration: 0.6,  ease: circInOut,},
     },
   };
 
