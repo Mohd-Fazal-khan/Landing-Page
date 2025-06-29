@@ -3,6 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { easeInOut } from 'framer-motion';
 
 const logos = [
   { name: "Hero", src: "/hero.png" },
