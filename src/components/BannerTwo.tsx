@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Head from "next/head";
 import Image from "next/image";
 
 export default function BannerTwo() {
