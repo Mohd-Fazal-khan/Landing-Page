@@ -10,7 +10,12 @@ const compat = new FlatCompat({
 });
 
 const eslintConfig = [
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
+  ...compat.extends("next/core-web-vitals", "next/typescript", {
+    rules: {
+      // ✅ Disable the font warning for App Router
+      "next/no-page-custom-font": "off",
+    },
+  }),
 ];
 
 export default eslintConfig;
