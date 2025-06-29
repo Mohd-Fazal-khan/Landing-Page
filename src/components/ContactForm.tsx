@@ -53,7 +53,7 @@ export default function QuoteRequestForm() {
     visible: { opacity: 1, y: 0 },
   };
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e:React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
