@@ -6,13 +6,13 @@ export default function HeroSection() {
   const [email, setEmail] = useState("");
 
   return (
-    <div className="min-h-screen flex items-stretch bg-white">
+    <div className="min-h-screen flex flex-col lg:flex-row items-stretch bg-white">
       
-      <div className="w-full lg:w-1/2 flex flex-col justify-center px-8 lg:px-20 py-12">
-        <div className="max-w-xl">
-        
+      <div className="w-full lg:w-1/2 flex flex-col justify-center px-6 md:px-12 lg:px-20 py-12">
+        <div className="max-w-xl mx-auto lg:mx-0">
+          
           <h1
-            className="text-[42px] font-bold tracking-[-0.02em] mb-6"
+            className="text-[32px] md:text-[42px] font-bold tracking-[-0.02em] mb-6 text-center lg:text-left"
             style={{
               fontFamily: "'Roboto Condensed', sans-serif",
               color: "#222222",
@@ -22,9 +22,8 @@ export default function HeroSection() {
             <span style={{ color: "#222222" }}>sit amet</span>
           </h1>
 
-         
           <p
-            className="text-[20px] md:text-[24px] tracking-[-0.02em] leading-snug mb-8"
+            className="text-[18px] md:text-[20px] lg:text-[24px] tracking-[-0.02em] leading-snug mb-8 text-center lg:text-left"
             style={{
               fontFamily: "'Inter', sans-serif",
               fontWeight: 400,
@@ -36,7 +35,6 @@ export default function HeroSection() {
             morbi libero imperdiet neque.
           </p>
 
-          
           <div className="flex flex-col sm:flex-row items-center gap-4">
             <input
               type="email"
@@ -65,9 +63,8 @@ export default function HeroSection() {
             </button>
           </div>
 
-        
           <div
-            className="flex items-center mt-6 text-[#1959AC] text-[20px] font-semibold tracking-[-0.02em]"
+            className="flex items-center mt-6 text-[#1959AC] text-[18px] md:text-[20px] font-semibold tracking-[-0.02em] justify-center lg:justify-start"
             style={{ fontFamily: "'Inter', sans-serif" }}
           >
             <div className="w-5 h-5 rounded-full bg-[#1959AC] text-white flex items-center justify-center mr-2">
@@ -87,8 +84,7 @@ export default function HeroSection() {
         </div>
       </div>
 
-      
-      <div className="hidden lg:block w-1/2 relative">
+      <div className="hidden lg:block w-full lg:w-1/2 relative">
         <div className="absolute inset-0 clip-diagonal">
           <img
             src="/Hero-Section.png"
@@ -98,14 +94,12 @@ export default function HeroSection() {
         </div>
       </div>
 
-      
       <style jsx>{`
         .clip-diagonal {
           clip-path: polygon(12% 0, 100% 0, 100% 100%, 0% 100%);
         }
       `}</style>
 
-      
       <style jsx global>{`
         @import url("https://fonts.googleapis.com/css2?family=Inter:wght@600&family=Roboto+Condensed:wght@700&display=swap");
       `}</style>
