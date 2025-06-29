@@ -14,7 +14,8 @@ export default function QuoteRequestForm() {
     projectDescription: "",
   });
 
-  const [errors, setErrors] = useState({});
+ const [errors, setErrors] = useState<Record<string, string>>({});
+
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const timeFrameOptions = [
