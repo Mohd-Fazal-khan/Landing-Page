@@ -88,7 +88,7 @@ export default function QuoteRequestForm() {
     return newErrors;
   };
 
-  const handleSubmit = async (e:React.FormEvent<HTMLFormElement>)) => {
+  const handleSubmit = async (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const newErrors = validateForm();
