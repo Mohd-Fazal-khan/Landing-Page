@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { easeInOut } from "framer-motion"
 
 export default function QuoteRequestForm() {
   const [formData, setFormData] = useState({
