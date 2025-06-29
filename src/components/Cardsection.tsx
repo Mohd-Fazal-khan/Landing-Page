@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { circInOut } from "framer-motion"
 
 const Cardsection = () => {
   const containerVariants = {
@@ -20,7 +19,7 @@ const Cardsection = () => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6,  ease: circInOut,},
+      transition: { duration: 0.6, ease: 'easeOut' },
     },
   };
 
@@ -44,21 +43,21 @@ const Cardsection = () => {
   ];
 
   return (
-    <div className="bg-white py-16 px-6 md:px-12 bg-[url('/bg-card.png')]">
-     
+    <div className="bg-white py-16 px-4 sm:px-6 md:px-12 bg-[url('/bg-card.png')] bg-no-repeat bg-cover">
+      {/* Heading Section */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
         className="mb-12"
       >
-        <div className="text-left">
+        <div className="text-center md:text-left max-w-4xl mx-auto">
           <p
             className="mb-2"
             style={{
               color: '#1959AC',
               fontFamily: "'Inter', sans-serif",
-              fontSize: '24px',
+              fontSize: '20px',
               fontWeight: 600,
               letterSpacing: '-0.02em',
             }}
@@ -66,10 +65,9 @@ const Cardsection = () => {
             Lorem ipsum dolor sit amet
           </p>
           <h2
-            className="mb-4"
+            className="mb-4 text-[32px] md:text-[42px]"
             style={{
               fontFamily: "'Roboto Condensed', sans-serif",
-              fontSize: '42px',
               fontWeight: 700,
               letterSpacing: '-0.02em',
               color: '#222222',
@@ -79,11 +77,10 @@ const Cardsection = () => {
             LOREM IPSUM DOLOR SIT
           </h2>
           <p
-            className="max-w-2xl"
+            className="max-w-2xl mx-auto md:mx-0 text-[14px] sm:text-[16px]"
             style={{
               color: '#222222',
               fontFamily: "'Inter', sans-serif",
-              fontSize: '16px',
               letterSpacing: '-0.02em',
             }}
           >
@@ -92,32 +89,31 @@ const Cardsection = () => {
         </div>
       </motion.div>
 
-     
-      <div className="max-w-4xl mx-auto">
+      {/* Cards Section */}
+      <div className="max-w-6xl mx-auto">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="grid grid-cols-1 md:grid-cols-2 gap-10 w-4xl"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-8"
         >
           {cards.map((card, index) => (
             <motion.div
               key={index}
               variants={cardVariants}
-              className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm"
+              className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow"
             >
               <img
                 src={card.image}
                 alt={card.title}
-                className="w-full h-64 object-cover"
+                className="w-full h-48 sm:h-64 object-cover"
               />
               <div className="p-6">
                 <h3
-                  className="mb-2"
+                  className="mb-2 text-[18px] sm:text-[20px]"
                   style={{
                     color: '#222222',
                     fontFamily: "'Inter', sans-serif",
-                    fontSize: '20px',
                     fontWeight: 600,
                     letterSpacing: '-0.02em',
                   }}
@@ -125,11 +121,10 @@ const Cardsection = () => {
                   {card.title}
                 </h3>
                 <p
-                  className="leading-relaxed mb-4"
+                  className="leading-relaxed mb-4 text-[14px]"
                   style={{
                     color: '#222222',
                     fontFamily: "'Inter', sans-serif",
-                    fontSize: '14px',
                     letterSpacing: '-0.02em',
                   }}
                 >
