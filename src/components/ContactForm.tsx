@@ -42,6 +42,7 @@ export default function QuoteRequestForm() {
       transition: {
         staggerChildren: 0.1,
         duration: 0.6,
+         ease: easeInOut,
       },
     },
   };
